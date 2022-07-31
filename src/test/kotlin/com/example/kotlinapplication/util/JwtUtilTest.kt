@@ -39,9 +39,15 @@ class JwtUtilTest {
   fun 期限の切れたトークンを復号できないこと() {
     val token = JwtUtil.createToken(
       subject = "subject",
-      expired = 0L, // 有効期限を0分に設定
+      expired = -1L, // 有効期限を1分前に設定
       algorithmSecret = "secret"
     )
-    assertThrows<Exception> { JwtUtil.decodeToken(token = token, algorithmSecret = "secret") }
+
+    assertThrows<Exception> {
+      JwtUtil.decodeToken(
+        token = token,
+        algorithmSecret = "secret"
+      )
+    }
   }
 }
