@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kotlinapplication.adapter.infrastructure.mapper.UserMasterMapper">
+  <resultMap id="Base_Result_Map" type="com.example.kotlinapplication.domain.user.UserMasterEntity">
+    <id column="userId" property="user_id" jdbcType="VARCHAR"/>
+    <result column="loginId" property="login_id" jdbcType="VARCHAR"/>
+    <result column="password" property="password" jdbcType="VARCHAR"/>
+    <result column="refreshToken" property="refresh_token" jdbcType="VARCHAR"/>
+    <result column="refreshTokenIssueAt" property="refresh_token_issue_at" jdbcType="TIMESTAMP"/>
+  </resultMap>
+
+  <select id="findByUserId" parameterType="String" resultMap="Base_Result_Map">
+    select user_id, login_id, password, refresh_token, refresh_token_issue_at
+    from user_master
+    where user_id = #{userId}
+  </select>
+
+  <select id="findByLoginId" parameterType="String" resultMap="Base_Result_Map">
+    select user_id, login_id, password, refresh_token, refresh_token_issue_at
+    from user_master
+    where login_id = #{loginId}
+  </select>
+
+  <insert id="save" parameterType="com.example.kotlinapplication.domain.user.UserMasterEntity">
+    insert into user_master (user_id, login_id, password, refresh_token, refresh_token_issue_at)
+    values (#{userId}, #{loginId}, #{password}, #{refreshToken}, #{refreshTokenIssueAt})
+  </insert>
+
+  <update id="update" parameterType="com.example.kotlinapplication.domain.user.UserMasterEntity">
+    update user_master
+    <set>
+      user_id = #{userId},
+      login_id = #{loginId},
+      password = #{password},
+      refresh_token = #{refreshToken},
+      refresh_token_issue_at = #{refreshTokenIssueAt},
+    </set>
+    where user_id = #{userId}
+  </update>
+</mapper>

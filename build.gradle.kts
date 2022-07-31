@@ -1,10 +1,9 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
   id("org.springframework.boot") version "2.7.2"
   id("io.spring.dependency-management") version "1.0.12.RELEASE"
   kotlin("jvm") version "1.6.21"
   kotlin("plugin.spring") version "1.6.21"
+  kotlin("kapt") version "1.7.10"
 }
 
 group = "com.example"
@@ -24,17 +23,13 @@ dependencies {
   implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
   implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2")
   implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5")
-  implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+  implementation("org.mybatis:mybatis-spring:2.0.7")
+  implementation("com.auth0:java-jwt:3.19.2")
+  implementation("org.apache.commons:commons-lang3:3.12.0")
+  implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.0")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.springframework.security:spring-security-test")
   runtimeOnly("mysql:mysql-connector-java")
-}
-
-tasks.withType<KotlinCompile> {
-  kotlinOptions {
-    freeCompilerArgs = listOf("-Xjsr305=strict")
-    jvmTarget = "11"
-  }
 }
 
 tasks.withType<Test> {
