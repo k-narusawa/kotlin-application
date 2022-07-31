@@ -30,8 +30,7 @@ class ApiExceptionHandler {
           is ObjectError -> ValidationInfo(error.objectName, error.defaultMessage ?: "")
           else -> null
         }
-      }
-      .toList()
+      }.toList()
     val error =
       ApiValidationError(message = "validation error", validationInfoList = validationInfoList)
     return ResponseEntity(error, HttpStatus.BAD_REQUEST)

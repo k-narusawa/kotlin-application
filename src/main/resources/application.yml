@@ -1,11 +1,6 @@
 spring:
   profiles:
     active: local
-  datasource:
-    url: jdbc:mysql://127.0.0.1:3306/kotlin_application
-    username: root
-    password: root
-    driverClassName: com.mysql.jdbc.Driver
 
 jwt:
   accessToken:
