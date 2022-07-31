@@ -48,7 +48,7 @@ class AuthorizationFilter(
     if (token != null) {
       val loginId: String =
         JwtUtil.decodeToken(token = token, algorithmSecret = environments.accessTokenSecret)
-      
+
       return UsernamePasswordAuthenticationToken(loginId, null, ArrayList())
     }
     return null

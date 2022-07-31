@@ -35,7 +35,8 @@ class SecurityConfig(
       .anyRequest().authenticated();
 
     // ログイン用のフィルタ
-    val authFilter = AuthenticationFilter(authenticationManager(), userService)
+    val authFilter =
+      AuthenticationFilter(authenticationManager(), userService)
     authFilter.setRequiresAuthenticationRequestMatcher(
       AntPathRequestMatcher(
         "/api/login",

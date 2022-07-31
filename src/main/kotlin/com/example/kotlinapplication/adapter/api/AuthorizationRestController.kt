@@ -25,6 +25,6 @@ class AuthorizationRestController(
     } catch (ex: Exception) {
       throw ex
     }
-    return userService.issueToken(loginId = jwt.subject)
+    return userService.issueToken(userId = jwt.subject)
   }
 }

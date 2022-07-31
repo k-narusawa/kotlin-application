@@ -31,7 +31,7 @@ class UserService(
       userMasterRepository.findByLoginId(loginId = loginId) ?: throw RuntimeException("認証失敗")
 
     return User
-      .withUsername(userMasterEntity.loginId)
+      .withUsername(userMasterEntity.userId)
       .password(userMasterEntity.password)
       .authorities(Collections.emptyList()).build()
   }
@@ -39,30 +39,30 @@ class UserService(
   /**
    * 認証後JWTトークンを発行
    *
-   * @param loginId ログインID
+   * @param userId
    * @return トークン情報
    */
-  fun issueToken(loginId: String): UserIssueToken {
+  fun issueToken(userId: String): UserIssueToken {
     val token = JwtUtil.createToken(
-      subject = loginId,
+      subject = userId,
       expired = environments.accessTokenExpired.toLong(),
       algorithmSecret = environments.accessTokenSecret
     )
     return UserIssueToken(
       accessToken = token,
-      refreshToken = generateRefreshToken(loginId)
+      refreshToken = generateRefreshToken(userId)
     )
   }
 
   /**
    * リフレッシュトークンを発行
    *
-   * @param loginId ログインID
+   * @param userId
    * @return リフレッシュトークン
    */
-  private fun generateRefreshToken(loginId: String): String {
+  private fun generateRefreshToken(userId: String): String {
     val userMasterEntity =
-      userMasterRepository.findByLoginId(loginId = loginId) ?: throw RuntimeException("認証失敗")
+      userMasterRepository.findByUserId(userId = userId) ?: throw RuntimeException("認証失敗")
     val refreshToken: String =
       RandomStringUtils.randomAlphabetic(refreshTokenDigit)
     val nextUserMasterEntity = UserMasterEntity(

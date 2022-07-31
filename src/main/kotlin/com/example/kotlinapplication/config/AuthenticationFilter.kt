@@ -4,7 +4,6 @@ import com.example.kotlinapplication.application.UserService
 import com.example.kotlinapplication.domain.user.UserAuthenticationForm
 import com.fasterxml.jackson.databind.ObjectMapper
 import java.io.IOException
-import java.lang.String
 import java.util.*
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
@@ -36,9 +35,9 @@ class AuthenticationFilter(
 
       return authenticationManager.authenticate(
         UsernamePasswordAuthenticationToken(
-          userAuthenticationForm.loginId,
-          userAuthenticationForm.password,
-          Collections.emptyList()
+          /* principal   */ userAuthenticationForm.loginId,
+          /* credentials */ userAuthenticationForm.password,
+          /* authorities */ Collections.emptyList()
         )
       )
     } catch (ex: IOException) {
