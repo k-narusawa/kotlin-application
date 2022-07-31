@@ -1,6 +1,8 @@
 package com.example.kotlinapplication.application
 
 import com.example.kotlinapplication.config.Environments
+import com.example.kotlinapplication.domain.exception.ApiApplicationException
+import com.example.kotlinapplication.domain.exception.ErrorCode
 import com.example.kotlinapplication.domain.service.repository.UserMasterRepository
 import com.example.kotlinapplication.domain.user.UserIssueToken
 import com.example.kotlinapplication.domain.user.UserMasterEntity
@@ -28,7 +30,8 @@ class UserService(
   @Transactional(readOnly = true)
   override fun loadUserByUsername(loginId: String): UserDetails {
     val userMasterEntity =
-      userMasterRepository.findByLoginId(loginId = loginId) ?: throw RuntimeException("認証失敗")
+      userMasterRepository.findByLoginId(loginId = loginId)
+        ?: throw ApiApplicationException(message = "認証失敗", errorCode = ErrorCode.UN_AUTHORIZED)
 
     return User
       .withUsername(userMasterEntity.userId)
@@ -62,7 +65,9 @@ class UserService(
    */
   private fun generateRefreshToken(userId: String): String {
     val userMasterEntity =
-      userMasterRepository.findByUserId(userId = userId) ?: throw RuntimeException("認証失敗")
+      userMasterRepository.findByUserId(userId = userId)
+        ?: throw ApiApplicationException(message = "認証失敗", errorCode = ErrorCode.UN_AUTHORIZED)
+
     val refreshToken: String =
       RandomStringUtils.randomAlphabetic(refreshTokenDigit)
     val nextUserMasterEntity = UserMasterEntity(

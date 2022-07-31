@@ -1,6 +1,8 @@
 package com.example.kotlinapplication.config
 
 import com.example.kotlinapplication.application.UserService
+import com.example.kotlinapplication.domain.exception.ApiApplicationException
+import com.example.kotlinapplication.domain.exception.ErrorCode
 import com.example.kotlinapplication.domain.user.UserAuthenticationForm
 import com.fasterxml.jackson.databind.ObjectMapper
 import java.io.IOException
@@ -41,7 +43,7 @@ class AuthenticationFilter(
         )
       )
     } catch (ex: IOException) {
-      throw RuntimeException("ex: ${ex}")
+      throw ApiApplicationException(message = "フィルタ内エラー", errorCode = ErrorCode.SERVER_ERROR)
     }
   }
 
