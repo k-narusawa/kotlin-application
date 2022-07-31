@@ -46,10 +46,10 @@ class AuthorizationFilter(
     val token = StringUtils.substringAfter(authHeader, TOKEN_PREFIX)
 
     if (token != null) {
-      val loginId: String =
+      val userId =
         JwtUtil.decodeToken(token = token, algorithmSecret = environments.accessTokenSecret)
 
-      return UsernamePasswordAuthenticationToken(loginId, null, ArrayList())
+      return UsernamePasswordAuthenticationToken(userId, null, ArrayList())
     }
     return null
   }
