@@ -33,21 +33,21 @@ class JwtUtilTest {
       val actual = JwtUtil.decodeToken(token = token, algorithmSecret = "secret")
       assertThat(actual).isEqualTo("subject")
     }
-  }
-
-  @Test
-  fun 期限の切れたトークンを復号できないこと() {
-    val token = JwtUtil.createToken(
-      subject = "subject",
-      expired = -1L, // 有効期限を1分前に設定
-      algorithmSecret = "secret"
-    )
-
-    assertThrows<Exception> {
-      JwtUtil.decodeToken(
-        token = token,
+    
+    @Test
+    fun 期限の切れたトークンを復号できないこと() {
+      val token = JwtUtil.createToken(
+        subject = "subject",
+        expired = -1L, // 有効期限を1分前に設定
         algorithmSecret = "secret"
       )
+
+      assertThrows<Exception> {
+        JwtUtil.decodeToken(
+          token = token,
+          algorithmSecret = "secret"
+        )
+      }
     }
   }
 }
