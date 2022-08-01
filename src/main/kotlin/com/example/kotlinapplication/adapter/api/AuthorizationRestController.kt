@@ -1,10 +1,11 @@
 package com.example.kotlinapplication.adapter.api
 
-import com.auth0.jwt.JWT
-import com.auth0.jwt.algorithms.Algorithm
 import com.example.kotlinapplication.application.UserService
 import com.example.kotlinapplication.config.Environments
+import com.example.kotlinapplication.domain.exception.ApiApplicationException
+import com.example.kotlinapplication.domain.exception.ErrorCode
 import com.example.kotlinapplication.domain.user.UserIssueToken
+import com.example.kotlinapplication.util.JwtUtil
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -19,12 +20,17 @@ class AuthorizationRestController(
 
   @PostMapping("/refresh_token")
   fun refreshToken(@RequestBody userIssueToken: UserIssueToken): UserIssueToken {
-    val jwt = JWT.decode(userIssueToken.accessToken)
     try {
-      JWT.require(Algorithm.HMAC512(environments.accessTokenSecret))
+      val userId = JwtUtil.decodeToken(
+        token = userIssueToken.accessToken,
+        algorithmSecret = environments.accessTokenSecret
+      )
+      return userService.issueToken(userId = userId)
     } catch (ex: Exception) {
-      throw ex
+      throw ApiApplicationException(
+        message = "リフレッシュトークンの生成に失敗しました",
+        errorCode = ErrorCode.UN_AUTHORIZED
+      )
     }
-    return userService.issueToken(userId = jwt.subject)
   }
 }
