@@ -27,6 +27,7 @@ dependencies {
   implementation("com.auth0:java-jwt:3.19.2")
   implementation("org.apache.commons:commons-lang3:3.12.0")
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.0")
+  implementation("org.springframework.boot:spring-boot-starter-data-redis:2.7.2")
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.springframework.security:spring-security-test")
   runtimeOnly("mysql:mysql-connector-java")
