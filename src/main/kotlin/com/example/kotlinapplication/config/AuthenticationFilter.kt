@@ -57,7 +57,9 @@ class AuthenticationFilter(
     authResult: Authentication
   ) {
     val issueToken = userService.issueToken(userId = authResult.name)
-    redisRepository.save(key = issueToken.accessToken, value = authResult.name)
+
+    // userIdをkeyにしてアクセストークンを保存
+    redisRepository.save(key = authResult.name, value = issueToken.accessToken)
     val json = ObjectMapper().writeValueAsString(issueToken)
     response.contentType = MediaType.APPLICATION_JSON_VALUE
     response.writer.write(json)

@@ -42,7 +42,7 @@ class AuthorizationFilter(
     // 後続のフィルタへ
     chain.doFilter(request, response)
   }
-  
+
   private fun getAuthentication(request: HttpServletRequest): UsernamePasswordAuthenticationToken? {
     val authHeader = request.getHeader(HttpHeaders.AUTHORIZATION)
     val token = StringUtils.substringAfter(authHeader, TOKEN_PREFIX)
@@ -50,9 +50,9 @@ class AuthorizationFilter(
     if (token != null) {
       val userId =
         JwtUtil.decodeToken(token = token, algorithmSecret = environments.accessTokenSecret)
-      val tokenValue = redisRepository.findByKey(key = token)
+      val accessTokenInRedis = redisRepository.findByKey(key = userId)
 
-      if (tokenValue == userId) // redisに保存されている値とuserIdの一致を確認
+      if (accessTokenInRedis == token) // redisに保存されている値とアクセストークンの一致を確認
         return UsernamePasswordAuthenticationToken(userId, null, ArrayList())
     }
     return null
