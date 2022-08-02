@@ -1,5 +1,7 @@
 package com.example.kotlinapplication.config
 
+import com.example.kotlinapplication.domain.exception.ApiApplicationException
+import com.example.kotlinapplication.domain.exception.ErrorCode
 import com.example.kotlinapplication.domain.service.repository.RedisRepository
 import com.example.kotlinapplication.util.JwtUtil
 import javax.servlet.http.HttpServletRequest
@@ -33,10 +35,23 @@ class ApiLogoutSuccessHandler(
 
     val authHeader = request?.getHeader(HttpHeaders.AUTHORIZATION)
     val accessToken = StringUtils.substringAfter(authHeader, TOKEN_PREFIX)
-    if (authHeader != null) {
-      val userId =
-        JwtUtil.decodeToken(token = accessToken, algorithmSecret = environments.accessTokenSecret)
-      redisRepository.deleteByKey(key = userId)
+    val userId = when {
+      authHeader != null -> JwtUtil.decodeToken(
+        token = accessToken,
+        algorithmSecret = environments.accessTokenSecret
+      )
+      else -> throw ApiApplicationException(
+        message = "error.unauthorized",
+        errorCode = ErrorCode.UN_AUTHORIZED
+      )
     }
+
+    val accessTokenInRedis = redisRepository.findByKey(key = userId)
+    if (accessToken != accessTokenInRedis)
+      throw ApiApplicationException(
+        message = "error.unauthorized",
+        errorCode = ErrorCode.UN_AUTHORIZED
+      )
+    redisRepository.deleteByKey(key = userId)
   }
 }

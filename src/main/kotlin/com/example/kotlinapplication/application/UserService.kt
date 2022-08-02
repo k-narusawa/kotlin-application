@@ -3,6 +3,7 @@ package com.example.kotlinapplication.application
 import com.example.kotlinapplication.config.Environments
 import com.example.kotlinapplication.domain.exception.ApiApplicationException
 import com.example.kotlinapplication.domain.exception.ErrorCode
+import com.example.kotlinapplication.domain.service.repository.RedisRepository
 import com.example.kotlinapplication.domain.service.repository.UserMasterRepository
 import com.example.kotlinapplication.domain.user.UserIssueToken
 import com.example.kotlinapplication.domain.user.UserMasterEntity
@@ -21,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional
 @Transactional
 class UserService(
   private val userMasterRepository: UserMasterRepository,
+  private val redisRepository: RedisRepository,
   private val environments: Environments
 ) : UserDetailsService {
   companion object {
@@ -51,6 +53,7 @@ class UserService(
       expired = environments.accessTokenExpired.toLong(),
       algorithmSecret = environments.accessTokenSecret
     )
+    redisRepository.save(key = userId, value = token)
     return UserIssueToken(
       accessToken = token,
       refreshToken = generateRefreshToken(userId)
