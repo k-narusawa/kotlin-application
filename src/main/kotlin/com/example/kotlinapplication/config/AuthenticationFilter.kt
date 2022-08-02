@@ -3,6 +3,7 @@ package com.example.kotlinapplication.config
 import com.example.kotlinapplication.application.UserService
 import com.example.kotlinapplication.domain.exception.ApiApplicationException
 import com.example.kotlinapplication.domain.exception.ErrorCode
+import com.example.kotlinapplication.domain.service.repository.RedisRepository
 import com.example.kotlinapplication.domain.user.UserAuthenticationForm
 import com.fasterxml.jackson.databind.ObjectMapper
 import java.io.IOException
@@ -18,7 +19,9 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 class AuthenticationFilter(
   authenticationManager: AuthenticationManager,
-  private val userService: UserService
+  private val userService: UserService,
+  private val redisRepository: RedisRepository,
+  private val environments: Environments
 ) :
   UsernamePasswordAuthenticationFilter(authenticationManager) {
 
@@ -53,7 +56,8 @@ class AuthenticationFilter(
     chain: FilterChain,
     authResult: Authentication
   ) {
-    val issueToken = userService.issueToken(authResult.name)
+    val issueToken = userService.issueToken(userId = authResult.name)
+    redisRepository.save(key = issueToken.accessToken, value = authResult.name)
     val json = ObjectMapper().writeValueAsString(issueToken)
     response.contentType = MediaType.APPLICATION_JSON_VALUE
     response.writer.write(json)
