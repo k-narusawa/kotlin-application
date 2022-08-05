@@ -38,7 +38,7 @@ class SecurityConfig(
 
     http
       .authorizeRequests()
-      .antMatchers("/api/login", "/api/refresh_token").permitAll()
+      .antMatchers("/api/login", "/api/refresh_token", "/api/signup").permitAll()
       .anyRequest().authenticated();
 
     http
