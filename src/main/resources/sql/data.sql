@@ -1,0 +1,2 @@
+insert into user_master (user_id, login_id, password) values ("1", "admin", "$2a$10$nGTcukjQfdPSztmDICsFuuCSm4FfKVrxhb9Laszx2dSOLmcIfEvX2");
+insert into user_master (user_id, login_id, password) values ("2", "guest", "$2a$10$nGTcukjQfdPSztmDICsFuuCSm4FfKVrxhb9Laszx2dSOLmcIfEvX2");

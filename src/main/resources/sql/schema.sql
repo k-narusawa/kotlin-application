@@ -1,6 +1,10 @@
-CREATE DATABASE IF NOT EXISTS kotlin_application;
+drop database if exists kotlin_application;
 
-create table user_master
+create database if not exists kotlin_application;
+
+use kotlin_application;
+
+create table if not exists user_master
 (
   user_id varchar(50)  not null PRIMARY KEY,
   login_id varchar(50)  not null,

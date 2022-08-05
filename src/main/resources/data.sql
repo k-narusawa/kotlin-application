@@ -1,1 +1,0 @@
-insert into user_master (user_id, login_id, password) values ("1", "admin", "admin");

@@ -6,10 +6,10 @@ spring:
     driverClassName: com.mysql.cj.jdbc.Driver
   sql:
     init:
-      enabled: true
-      schema-locations: classpath:schema.sql
-      data-locations: classpath:data.sql
-      
+      mode: always
+      schema-locations: classpath:sql/schema.sql
+      data-locations: classpath:sql/data.sql
+
 spring.redis:
   host: localhost
   port: 6379
