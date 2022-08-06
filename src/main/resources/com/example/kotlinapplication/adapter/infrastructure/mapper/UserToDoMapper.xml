@@ -33,8 +33,9 @@
   </insert>
 
   <update id="update" parameterType="com.example.kotlinapplication.domain.user.todo.UserToDoEntity">
-    update user_master
+    update user_todo
     <set>
+      todo_id = #{todoId},
       user_id = #{userId},
       todo = #{todo},
       time_limit = #{timeLimit},
