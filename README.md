@@ -1,5 +1,19 @@
 ## 認証機能つきAPI
 
+### 起動方法
+
+1. dockerを起動する
+
+```shell
+./gradlew clean composeUp
+```
+
+2. アプリケーションを起動する
+
+```shell
+./gradlew clean bootRun
+```
+
 ### 使い方
 
 * ログインAPIにてアクセストークンおよびリフレッシュトークンを取得する
