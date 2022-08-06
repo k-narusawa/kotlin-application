@@ -21,4 +21,8 @@ class UserToDoRepositoryImpl(private val userToDoMapper: UserToDoMapper) : UserT
   override fun update(userToDoEntity: UserToDoEntity) {
     userToDoMapper.update(userToDoEntity = userToDoEntity)
   }
+
+  override fun deleteByUserIdAndToDoId(userId: String, todoId: Long) {
+    userToDoMapper.deleteByUserIdAndToDoId(userId = userId, todoId = todoId)
+  }
 }

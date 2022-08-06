@@ -45,8 +45,9 @@
     where todo_id = #{todoId}
   </update>
 
-  <delete id="deleteByToDoId" parameterType="Long">
+  <delete id="deleteByUserIdAndToDoId">
     delete from user_todo
-    where todo_id = #{todoId}
+    where user_id = #{userId}
+    and todo_id = #{todoId}
   </delete>
 </mapper>

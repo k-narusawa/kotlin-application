@@ -60,4 +60,8 @@ class UserToDoService(private val userToDoRepository: UserToDoRepository) {
     )
     userToDoRepository.save(userToDoEntity = userToDoEntity)
   }
+
+  fun deleteToDo(userId: String, todoId: Long) {
+    userToDoRepository.deleteByUserIdAndToDoId(userId = userId, todoId = todoId)
+  }
 }

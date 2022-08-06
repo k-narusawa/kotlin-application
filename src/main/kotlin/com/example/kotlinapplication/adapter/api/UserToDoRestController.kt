@@ -5,6 +5,7 @@ import com.example.kotlinapplication.domain.user.todo.UserToDoDto
 import com.example.kotlinapplication.domain.user.todo.UserToDoForm
 import java.security.Principal
 import org.springframework.http.HttpStatus
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -66,5 +67,12 @@ class UserToDoRestController(
       timeLimit = userToDoForm.timeLimit,
       doneFlg = userToDoForm.doneFlg
     )
+  }
+
+  @DeleteMapping("/{todoId}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  fun deleteToDo(@PathVariable(value = "todoId") todoId: Long, principal: Principal) {
+    val userId = principal.name
+    userToDoService.deleteToDo(userId = userId, todoId = todoId)
   }
 }
