@@ -42,4 +42,22 @@ class UserToDoService(private val userToDoRepository: UserToDoRepository) {
     )
     userToDoRepository.update(userToDoEntity = userToDoEntity)
   }
+
+  fun saveToDo(
+    userId: String,
+    todo: String,
+    priority: Priority?,
+    timeLimit: LocalDateTime?,
+    doneFlg: Boolean
+  ) {
+    val userToDoEntity = UserToDoEntity(
+      todoId = null,
+      userId = userId,
+      todo = todo,
+      timeLimit = timeLimit,
+      priority = priority,
+      doneFlg = doneFlg
+    )
+    userToDoRepository.save(userToDoEntity = userToDoEntity)
+  }
 }

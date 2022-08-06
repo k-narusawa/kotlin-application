@@ -5,7 +5,7 @@ import com.example.kotlinapplication.domain.exception.ErrorCode
 import java.time.LocalDateTime
 
 data class UserToDoEntity(
-  val todoId: Long,
+  val todoId: Long? = null,
   val userId: String,
   val todo: String,
   val timeLimit: LocalDateTime? = null,
@@ -16,7 +16,10 @@ data class UserToDoEntity(
 ) {
   fun toDto() =
     UserToDoDto(
-      todoId = todoId,
+      todoId = todoId ?: throw ApiApplicationException(
+        message = "todoIdを取得できませんでした",
+        errorCode = ErrorCode.SERVER_ERROR
+      ),
       userid = userId,
       todo = todo,
       timeLimit = timeLimit,

@@ -4,11 +4,14 @@ import com.example.kotlinapplication.application.UserToDoService
 import com.example.kotlinapplication.domain.user.todo.UserToDoDto
 import com.example.kotlinapplication.domain.user.todo.UserToDoForm
 import java.security.Principal
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
 
@@ -45,6 +48,19 @@ class UserToDoRestController(
     userToDoService.updateToDo(
       userId = userId,
       todoId = todoId,
+      todo = userToDoForm.todo,
+      priority = userToDoForm.priority,
+      timeLimit = userToDoForm.timeLimit,
+      doneFlg = userToDoForm.doneFlg
+    )
+  }
+
+  @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
+  fun saveToDo(@RequestBody userToDoForm: UserToDoForm, principal: Principal) {
+    val userId = principal.name
+    userToDoService.saveToDo(
+      userId = userId,
       todo = userToDoForm.todo,
       priority = userToDoForm.priority,
       timeLimit = userToDoForm.timeLimit,

@@ -29,7 +29,7 @@
 
   <insert id="save" parameterType="com.example.kotlinapplication.domain.user.todo.UserToDoEntity">
     insert into user_todo (user_id, todo, time_limit, priority, done_flg)
-    values (#{userId}, #{todo}, #{timeLimit}, #{priority}, #{doneFlg},)
+    values (#{userId}, #{todo}, #{timeLimit}, #{priority}, #{doneFlg})
   </insert>
 
   <update id="update" parameterType="com.example.kotlinapplication.domain.user.todo.UserToDoEntity">
@@ -44,4 +44,9 @@
     </set>
     where todo_id = #{todoId}
   </update>
+
+  <delete id="deleteByToDoId" parameterType="Long">
+    delete from user_todo
+    where todo_id = #{todoId}
+  </delete>
 </mapper>
