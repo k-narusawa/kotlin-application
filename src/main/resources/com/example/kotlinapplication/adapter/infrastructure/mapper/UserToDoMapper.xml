@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.kotlinapplication.adapter.infrastructure.mapper.UserToDoMapper">
+  <resultMap id="Base_Result_Map"
+    type="com.example.kotlinapplication.domain.user.todo.UserToDoEntity">
+    <id column="todoId" property="todo_id" jdbcType="INT"/>
+    <result column="userId" property="user_id" jdbcType="VARCHAR"/>
+    <result column="todo" property="todo" jdbcType="VARCHAR"/>
+    <result column="deadLine" property="deadline" jdbcType="TIMESTAMP"/>
+    <result column="priority" property="priority" jdbcType="VARCHAR"/>
+    <result column="createAt" property="create_at" jdbcType="TIMESTAMP"/>
+    <result column="updateAt" property="update_at" jdbcType="TIMESTAMP"/>
+  </resultMap>
+
+  <select id="findByUserId" parameterType="String" resultMap="Base_Result_Map">
+    select todo_id, user_id, todo, deadLine, priority, create_at, update_at
+    from user_todo
+    where user_id = #{userId}
+  </select>
+
+  <select id="findByToDoId" parameterType="String" resultMap="Base_Result_Map">
+    select todo_id, user_id, todo, deadLine, priority, create_at, update_at
+    from user_todo
+    where todo_id = #{todoId}
+  </select>
+
+  <insert id="save" parameterType="com.example.kotlinapplication.domain.user.UserToDoEntity">
+    insert into user_todo (user_id, todo, deadLine, priority)
+    values (#{userId}, #{todo}, #{deadLine}, #{priority})
+  </insert>
+
+  <update id="update" parameterType="com.example.kotlinapplication.domain.user.UserToDoEntity">
+    update user_master
+    <set>
+      user_id = #{userId},
+      todo = #{todo},
+      deadline = #{deadLine},
+      priority = #{priority},
+    </set>
+    where todo_id = #{todoId}
+  </update>
+</mapper>
