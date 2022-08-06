@@ -24,7 +24,7 @@ dependencies {
   implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:2.2.2")
   implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5")
   implementation("org.mybatis:mybatis-spring:2.0.7")
-  implementation("com.auth0:java-jwt:3.19.2")
+  implementation("com.auth0:java-jwt:4.0.0")
   implementation("org.apache.commons:commons-lang3:3.12.0")
   implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.0")
   implementation("org.springframework.boot:spring-boot-starter-data-redis:2.7.2")

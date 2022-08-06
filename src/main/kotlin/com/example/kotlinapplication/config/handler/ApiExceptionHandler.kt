@@ -1,4 +1,4 @@
-package com.example.kotlinapplication.config
+package com.example.kotlinapplication.config.handler
 
 import com.example.kotlinapplication.domain.error.ApiApplicationError
 import com.example.kotlinapplication.domain.error.ApiValidationError

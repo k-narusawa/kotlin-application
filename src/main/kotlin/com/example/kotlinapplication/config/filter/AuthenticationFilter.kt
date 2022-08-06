@@ -1,4 +1,4 @@
-package com.example.kotlinapplication.config
+package com.example.kotlinapplication.config.filter
 
 import com.example.kotlinapplication.application.UserService
 import com.example.kotlinapplication.domain.exception.ApiApplicationException
@@ -11,6 +11,7 @@ import java.util.*
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
+import org.slf4j.Logger
 import org.springframework.http.MediaType
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
@@ -21,7 +22,7 @@ class AuthenticationFilter(
   authenticationManager: AuthenticationManager,
   private val userService: UserService,
   private val redisRepository: RedisRepository,
-  private val environments: Environments
+  private val log: Logger
 ) :
   UsernamePasswordAuthenticationFilter(authenticationManager) {
 
@@ -34,7 +35,7 @@ class AuthenticationFilter(
         "[%s] %-4s %s",
         request.localAddr, request.method, request.requestURI
       )
-      println(message)
+      log.debug(message)
       val userAuthenticationForm: UserAuthenticationForm =
         ObjectMapper().readValue(request.inputStream, UserAuthenticationForm::class.java)
 

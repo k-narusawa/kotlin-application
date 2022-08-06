@@ -1,5 +1,6 @@
-package com.example.kotlinapplication.config
+package com.example.kotlinapplication.config.handler
 
+import com.example.kotlinapplication.config.Environments
 import com.example.kotlinapplication.domain.exception.ApiApplicationException
 import com.example.kotlinapplication.domain.exception.ErrorCode
 import com.example.kotlinapplication.domain.service.repository.RedisRepository
