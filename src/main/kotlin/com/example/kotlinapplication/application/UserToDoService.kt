@@ -7,8 +7,10 @@ import com.example.kotlinapplication.domain.user.todo.UserToDoEntity
 import java.time.LocalDateTime
 import org.apache.ibatis.session.RowBounds
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
+@Transactional
 class UserToDoService(private val userToDoRepository: UserToDoRepository) {
   /**
    * 会員に紐づくToDoの一覧を取得
@@ -16,6 +18,7 @@ class UserToDoService(private val userToDoRepository: UserToDoRepository) {
    * @param userId
    * @return ToDoのリスト
    */
+  @Transactional(readOnly = true)
   fun getToDos(
     userId: String,
     keyword: String,
@@ -33,6 +36,7 @@ class UserToDoService(private val userToDoRepository: UserToDoRepository) {
     return userToDoEntities.value.map { it.toDto() }
   }
 
+  @Transactional(readOnly = true)
   fun getToDo(userId: String, todoId: Long): UserToDoDto? {
     return userToDoRepository.findByUserIdAndToDoId(userId = userId, todoId = todoId)?.toDto()
   }
