@@ -4,10 +4,23 @@ import java.time.LocalDateTime
 
 data class UserToDoEntity(
   val todoId: Long,
-  val userid: String,
+  val userId: String,
   val todo: String,
-  val deadLine: LocalDateTime?,
+  val timeLimit: LocalDateTime?,
   val priority: Priority?,
-  val createAt: LocalDateTime,
-  val updateAt: LocalDateTime
-)
+  val doneFlg: Boolean,
+  val createdAt: LocalDateTime,
+  val updatedAt: LocalDateTime
+) {
+  fun toDto() =
+    UserToDoDto(
+      todoId = todoId,
+      userid = userId,
+      todo = todo,
+      timeLimit = timeLimit,
+      priority = priority,
+      doneFlg = doneFlg,
+      createdAt = createdAt,
+      updatedAt = updatedAt
+    )
+}

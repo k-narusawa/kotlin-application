@@ -4,39 +4,41 @@
 <mapper namespace="com.example.kotlinapplication.adapter.infrastructure.mapper.UserToDoMapper">
   <resultMap id="Base_Result_Map"
     type="com.example.kotlinapplication.domain.user.todo.UserToDoEntity">
-    <id column="todoId" property="todo_id" jdbcType="INT"/>
+    <id column="todoId" property="todo_id" jdbcType="INTEGER"/>
     <result column="userId" property="user_id" jdbcType="VARCHAR"/>
     <result column="todo" property="todo" jdbcType="VARCHAR"/>
-    <result column="deadLine" property="deadline" jdbcType="TIMESTAMP"/>
+    <result column="timeLimit" property="time_limit" jdbcType="TIMESTAMP"/>
     <result column="priority" property="priority" jdbcType="VARCHAR"/>
-    <result column="createAt" property="create_at" jdbcType="TIMESTAMP"/>
-    <result column="updateAt" property="update_at" jdbcType="TIMESTAMP"/>
+    <result column="doneFlg" property="done_flg" jdbcType="VARCHAR"/>
+    <result column="createdAt" property="created_at" jdbcType="TIMESTAMP"/>
+    <result column="updatedAt" property="updated_at" jdbcType="TIMESTAMP"/>
   </resultMap>
 
   <select id="findByUserId" parameterType="String" resultMap="Base_Result_Map">
-    select todo_id, user_id, todo, deadLine, priority, create_at, update_at
+    select todo_id, user_id, todo, time_limit, priority, done_flg, created_at, updated_at
     from user_todo
     where user_id = #{userId}
   </select>
 
-  <select id="findByToDoId" parameterType="String" resultMap="Base_Result_Map">
-    select todo_id, user_id, todo, deadLine, priority, create_at, update_at
+  <select id="findByToDoId" parameterType="Long" resultMap="Base_Result_Map">
+    select todo_id, user_id, todo, time_limit, priority, done_flg, created_at, updated_at
     from user_todo
     where todo_id = #{todoId}
   </select>
 
-  <insert id="save" parameterType="com.example.kotlinapplication.domain.user.UserToDoEntity">
-    insert into user_todo (user_id, todo, deadLine, priority)
-    values (#{userId}, #{todo}, #{deadLine}, #{priority})
+  <insert id="save" parameterType="com.example.kotlinapplication.domain.user.todo.UserToDoEntity">
+    insert into user_todo (user_id, todo, time_limit, priority, done_flg)
+    values (#{userId}, #{todo}, #{timeLimit}, #{priority}, #{doneFlg},)
   </insert>
 
-  <update id="update" parameterType="com.example.kotlinapplication.domain.user.UserToDoEntity">
+  <update id="update" parameterType="com.example.kotlinapplication.domain.user.todo.UserToDoEntity">
     update user_master
     <set>
       user_id = #{userId},
       todo = #{todo},
-      deadline = #{deadLine},
+      time_limit = #{timeLimit},
       priority = #{priority},
+      done_flg = #{doneFlg},
     </set>
     where todo_id = #{todoId}
   </update>

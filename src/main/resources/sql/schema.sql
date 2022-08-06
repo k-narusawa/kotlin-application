@@ -34,8 +34,9 @@ create table if not exists user_todo
   todo_id bigint  not null PRIMARY KEY  auto_increment comment 'todoID',
   user_id varchar(50)  not null comment '会員ID',
   todo varchar(50)  not null comment 'todo',
-  deadline datetime comment '締切',
+  time_limit datetime comment '締切',
   priority enum('HIGH', 'MIDDLE', 'LOW') comment '優先度',
+  done_flg boolean not null default false comment '完了フラグ',
   created_at datetime  default current_timestamp comment '作成日時',
   updated_at datetime default current_timestamp on update current_timestamp comment '更新日時'
 ) engine=InnoDB charset=utf8;
