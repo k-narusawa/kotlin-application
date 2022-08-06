@@ -1,7 +1,13 @@
 package com.example.kotlinapplication.config
 
 import com.example.kotlinapplication.application.UserService
+import com.example.kotlinapplication.config.filter.AuthenticationFilter
+import com.example.kotlinapplication.config.filter.AuthorizationFilter
+import com.example.kotlinapplication.config.handler.ApiAccessDeniedHandler
+import com.example.kotlinapplication.config.handler.ApiAuthenticationEntryPoint
+import com.example.kotlinapplication.config.handler.ApiLogoutSuccessHandler
 import com.example.kotlinapplication.domain.service.repository.RedisRepository
+import org.slf4j.Logger
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -23,6 +29,7 @@ class SecurityConfig(
   private val apiAuthenticationEntryPoint: ApiAuthenticationEntryPoint,
   private val apiAccessDeniedHandler: ApiAccessDeniedHandler,
   private val apiLogoutSuccessHandler: ApiLogoutSuccessHandler,
+  private val log: Logger,
   private val environments: Environments
 ) :
   WebSecurityConfigurerAdapter() {
@@ -49,7 +56,7 @@ class SecurityConfig(
 
     // ログイン用のフィルタ
     val authFilter =
-      AuthenticationFilter(authenticationManager(), userService, redisRepository, environments)
+      AuthenticationFilter(authenticationManager(), userService, redisRepository, log)
     authFilter.setRequiresAuthenticationRequestMatcher(
       AntPathRequestMatcher(
         "/api/login",
