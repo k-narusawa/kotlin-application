@@ -20,10 +20,11 @@
     where user_id = #{userId}
   </select>
 
-  <select id="findByToDoId" parameterType="Long" resultMap="Base_Result_Map">
+  <select id="findByUserIdAndToDoId" resultMap="Base_Result_Map">
     select todo_id, user_id, todo, time_limit, priority, done_flg, created_at, updated_at
     from user_todo
-    where todo_id = #{todoId}
+    where user_id = #{userId}
+    and todo_id = #{todoId}
   </select>
 
   <insert id="save" parameterType="com.example.kotlinapplication.domain.user.todo.UserToDoEntity">

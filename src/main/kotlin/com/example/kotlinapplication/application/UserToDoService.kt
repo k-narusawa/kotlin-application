@@ -16,4 +16,8 @@ class UserToDoService(private val userToDoRepository: UserToDoRepository) {
     val userToDoEntities = userToDoRepository.findByUserId(userId = userId)
     return userToDoEntities.value.map { it.toDto() }
   }
+
+  fun getToDo(userId: String, todoId: Long): UserToDoDto? {
+    return userToDoRepository.findByUserIdAndToDoId(userId = userId, todoId = todoId)?.toDto()
+  }
 }

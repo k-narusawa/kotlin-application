@@ -4,6 +4,7 @@ import com.example.kotlinapplication.application.UserToDoService
 import com.example.kotlinapplication.domain.user.todo.UserToDoDto
 import java.security.Principal
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -23,5 +24,11 @@ class UserToDoRestController(
   fun getToDos(principal: Principal): List<UserToDoDto> {
     val userId = principal.name
     return userToDoService.getToDos(userId = userId)
+  }
+
+  @GetMapping("/{todoId}")
+  fun getToDo(@PathVariable(value = "todoId") todoId: String, principal: Principal): UserToDoDto? {
+    val userId = principal.name
+    return userToDoService.getToDo(userId = userId, todoId = todoId.toLong())
   }
 }

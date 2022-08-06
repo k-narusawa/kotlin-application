@@ -5,7 +5,7 @@ import com.example.kotlinapplication.domain.user.todo.UserToDoEntity
 
 interface UserToDoRepository {
   fun findByUserId(userId: String): UserToDoEntities
-  fun findByToDoId(todoId: Long): UserToDoEntity?
+  fun findByUserIdAndToDoId(userId: String, todoId: Long): UserToDoEntity?
   fun save(userToDoEntity: UserToDoEntity)
   fun update(userToDoEntity: UserToDoEntity)
 }

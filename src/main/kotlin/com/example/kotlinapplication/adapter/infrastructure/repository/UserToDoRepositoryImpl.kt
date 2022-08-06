@@ -10,9 +10,9 @@ import org.springframework.stereotype.Repository
 class UserToDoRepositoryImpl(private val userToDoMapper: UserToDoMapper) : UserToDoRepository {
   override fun findByUserId(userId: String): UserToDoEntities =
     UserToDoEntities(userToDoMapper.findByUserId(userId = userId).map { it })
-  
-  override fun findByToDoId(todoId: Long): UserToDoEntity? =
-    userToDoMapper.findByToDoId(todoId = todoId)
+
+  override fun findByUserIdAndToDoId(userId: String, todoId: Long): UserToDoEntity? =
+    userToDoMapper.findByUserIdAndToDoId(userId = userId, todoId = todoId)
 
   override fun save(userToDoEntity: UserToDoEntity) {
     userToDoMapper.save(userToDoEntity = userToDoEntity)
