@@ -5,6 +5,7 @@ import com.example.kotlinapplication.domain.user.todo.Priority
 import com.example.kotlinapplication.domain.user.todo.UserToDoDto
 import com.example.kotlinapplication.domain.user.todo.UserToDoEntity
 import java.time.LocalDateTime
+import org.apache.ibatis.session.RowBounds
 import org.springframework.stereotype.Service
 
 @Service
@@ -15,8 +16,20 @@ class UserToDoService(private val userToDoRepository: UserToDoRepository) {
    * @param userId
    * @return ToDoのリスト
    */
-  fun getToDos(userId: String): List<UserToDoDto> {
-    val userToDoEntities = userToDoRepository.findByUserId(userId = userId)
+  fun getToDos(
+    userId: String,
+    keyword: String,
+    doneFlg: Boolean?,
+    limit: Int,
+    offset: Int
+  ): List<UserToDoDto> {
+    val rowBounds = RowBounds(offset, limit)
+    val userToDoEntities = userToDoRepository.findByUserIdAndKeywordAndDoneFlg(
+      userId = userId,
+      keyword = keyword,
+      doneFlg = doneFlg,
+      rowBounds = rowBounds
+    )
     return userToDoEntities.value.map { it.toDto() }
   }
 

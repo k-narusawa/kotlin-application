@@ -20,6 +20,18 @@
     where user_id = #{userId}
   </select>
 
+  <select id="findByUserIdAndKeywordAndDoneFlg" resultMap="Base_Result_Map">
+    select todo_id, user_id, todo, time_limit, priority, done_flg, created_at, updated_at
+    from user_todo
+    where 1 = 1
+    <if test="keyword != null">
+      and todo like concat('%', #{keyword}, '%')
+    </if>
+    <if test="doneFlg != null">
+      and done_flg = #{doneFlg}
+    </if>
+  </select>
+
   <select id="findByUserIdAndToDoId" resultMap="Base_Result_Map">
     select todo_id, user_id, todo, time_limit, priority, done_flg, created_at, updated_at
     from user_todo

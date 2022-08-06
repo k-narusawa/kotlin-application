@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestController
 
@@ -28,9 +29,21 @@ class UserToDoRestController(
    * @return ToDoのリスト
    */
   @GetMapping
-  fun getToDos(principal: Principal): List<UserToDoDto> {
+  fun getToDos(
+    @RequestParam("keyword") keyword: String,
+    @RequestParam("doneFlg") doneFlg: Boolean?,
+    @RequestParam("limit") limit: Int?,
+    @RequestParam("offset") offset: Int?,
+    principal: Principal
+  ): List<UserToDoDto> {
     val userId = principal.name
-    return userToDoService.getToDos(userId = userId)
+    return userToDoService.getToDos(
+      userId = userId,
+      keyword = keyword,
+      doneFlg = doneFlg,
+      limit = limit ?: 10,
+      offset = offset ?: 0
+    )
   }
 
   @GetMapping("/{todoId}")
