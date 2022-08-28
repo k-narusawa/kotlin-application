@@ -18,6 +18,9 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.authentication.logout.HttpStatusReturningLogoutSuccessHandler
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.CorsConfigurationSource
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 
 
 @EnableWebSecurity
@@ -46,7 +49,7 @@ class SecurityConfig(
     http
       .authorizeRequests()
       .antMatchers("/api/login", "/api/refresh_token", "/api/signup").permitAll()
-      .anyRequest().authenticated();
+      .anyRequest().authenticated()
 
     http
       .exceptionHandling()
@@ -64,7 +67,7 @@ class SecurityConfig(
       )
     )
     authFilter.setAuthenticationManager(authenticationManagerBean())
-    http.addFilter(authFilter)
+    http.addFilter(authFilter).cors().configurationSource(this.corsConfigurationSource())
 
     // 認証用フィルタ
     val authorizationFilter =
@@ -92,6 +95,21 @@ class SecurityConfig(
 
   fun logoutSuccessHandler(): LogoutSuccessHandler? {
     return HttpStatusReturningLogoutSuccessHandler()
+  }
+
+  private fun corsConfigurationSource(): CorsConfigurationSource {
+    val config = CorsConfiguration()
+    config.allowCredentials = true
+    config.addAllowedMethod("GET")
+    config.addAllowedMethod("POST")
+    config.addAllowedMethod("PUT")
+    config.addAllowedMethod("DELETE")
+    config.addAllowedMethod("OPTIONS")
+    config.addAllowedOrigin("http://localhost:3000")
+    config.addAllowedHeader(CorsConfiguration.ALL)
+    val source = UrlBasedCorsConfigurationSource()
+    source.registerCorsConfiguration("/**", config)
+    return source
   }
 
 }
