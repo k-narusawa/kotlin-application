@@ -37,7 +37,7 @@ dependencies {
 
 jib {
   to {
-    image = "19992240/kotlin-application"
+    image = "registry.hub.docker.com/19992240/kotlin-application"
     tags = setOf("$version", "$version")
   }
 }
