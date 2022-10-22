@@ -2,7 +2,7 @@ plugins {
   id("org.springframework.boot") version "2.7.4"
   id("io.spring.dependency-management") version "1.0.12.RELEASE"
   id("com.avast.gradle.docker-compose") version "0.16.8"
-  id("com.google.cloud.tools.jib") version "3.2.1"
+  id("com.google.cloud.tools.jib") version "3.3.0"
   kotlin("jvm") version "1.6.21"
   kotlin("plugin.spring") version "1.6.21"
   kotlin("kapt") version "1.7.10"
@@ -33,6 +33,13 @@ dependencies {
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.springframework.security:spring-security-test")
   runtimeOnly("mysql:mysql-connector-java")
+}
+
+jib {
+  to {
+    image = "19992240/kotlin-application"
+    tags = setOf("$version", "$version")
+  }
 }
 
 tasks.withType<Test> {
