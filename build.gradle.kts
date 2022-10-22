@@ -1,5 +1,5 @@
 plugins {
-  id("org.springframework.boot") version "2.7.2"
+  id("org.springframework.boot") version "2.7.4"
   id("io.spring.dependency-management") version "1.0.12.RELEASE"
   id("com.avast.gradle.docker-compose") version "0.16.8"
   id("com.google.cloud.tools.jib") version "3.2.1"
@@ -37,10 +37,4 @@ dependencies {
 
 tasks.withType<Test> {
   useJUnitPlatform()
-}
-
-jib {
-  to {
-    image = "kotlin/kotlin_application"
-  }
 }
