@@ -1,9 +1,9 @@
 package com.example.kotlinapplication.config.handler
 
+import com.example.kotlinapplication.adapter.infrastructure.repository.RedisRepository
 import com.example.kotlinapplication.config.Environments
 import com.example.kotlinapplication.domain.exception.ApiApplicationException
 import com.example.kotlinapplication.domain.exception.ErrorCode
-import com.example.kotlinapplication.domain.service.repository.RedisRepository
 import com.example.kotlinapplication.util.JwtUtil
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse

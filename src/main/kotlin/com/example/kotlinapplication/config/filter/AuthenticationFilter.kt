@@ -1,9 +1,9 @@
 package com.example.kotlinapplication.config.filter
 
+import com.example.kotlinapplication.adapter.infrastructure.repository.RedisRepository
 import com.example.kotlinapplication.application.UserService
 import com.example.kotlinapplication.domain.exception.ApiApplicationException
 import com.example.kotlinapplication.domain.exception.ErrorCode
-import com.example.kotlinapplication.domain.service.repository.RedisRepository
 import com.example.kotlinapplication.domain.user.UserAuthenticationForm
 import com.fasterxml.jackson.databind.ObjectMapper
 import java.io.IOException

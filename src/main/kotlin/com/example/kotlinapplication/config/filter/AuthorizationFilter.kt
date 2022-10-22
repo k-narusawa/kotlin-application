@@ -1,7 +1,7 @@
 package com.example.kotlinapplication.config.filter
 
+import com.example.kotlinapplication.adapter.infrastructure.repository.RedisRepository
 import com.example.kotlinapplication.config.Environments
-import com.example.kotlinapplication.domain.service.repository.RedisRepository
 import com.example.kotlinapplication.util.JwtUtil
 import javax.servlet.FilterChain
 import javax.servlet.http.HttpServletRequest

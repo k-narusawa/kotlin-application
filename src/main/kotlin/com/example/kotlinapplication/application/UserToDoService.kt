@@ -1,6 +1,6 @@
 package com.example.kotlinapplication.application
 
-import com.example.kotlinapplication.domain.service.repository.UserToDoRepository
+import com.example.kotlinapplication.adapter.infrastructure.repository.UserToDoRepository
 import com.example.kotlinapplication.domain.user.todo.Priority
 import com.example.kotlinapplication.domain.user.todo.UserToDoDto
 import com.example.kotlinapplication.domain.user.todo.UserToDoEntity

@@ -1,12 +1,12 @@
 package com.example.kotlinapplication.config
 
+import com.example.kotlinapplication.adapter.infrastructure.repository.RedisRepository
 import com.example.kotlinapplication.application.UserService
 import com.example.kotlinapplication.config.filter.AuthenticationFilter
 import com.example.kotlinapplication.config.filter.AuthorizationFilter
 import com.example.kotlinapplication.config.handler.ApiAccessDeniedHandler
 import com.example.kotlinapplication.config.handler.ApiAuthenticationEntryPoint
 import com.example.kotlinapplication.config.handler.ApiLogoutSuccessHandler
-import com.example.kotlinapplication.domain.service.repository.RedisRepository
 import org.slf4j.Logger
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity

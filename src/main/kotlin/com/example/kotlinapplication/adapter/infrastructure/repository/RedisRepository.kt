@@ -1,4 +1,4 @@
-package com.example.kotlinapplication.domain.service.repository
+package com.example.kotlinapplication.adapter.infrastructure.repository
 
 interface RedisRepository {
   fun findByKey(key: String): String?

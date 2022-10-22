@@ -1,6 +1,6 @@
-package com.example.kotlinapplication.adapter.infrastructure.repository
+package com.example.kotlinapplication.adapter.infrastructure.repository.impl
 
-import com.example.kotlinapplication.domain.service.repository.RedisRepository
+import com.example.kotlinapplication.adapter.infrastructure.repository.RedisRepository
 import java.util.concurrent.TimeUnit
 import org.springframework.data.redis.core.StringRedisTemplate
 import org.springframework.stereotype.Repository

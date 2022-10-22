@@ -1,7 +1,7 @@
-package com.example.kotlinapplication.adapter.infrastructure.repository
+package com.example.kotlinapplication.adapter.infrastructure.repository.impl
 
 import com.example.kotlinapplication.adapter.infrastructure.mapper.UserToDoMapper
-import com.example.kotlinapplication.domain.service.repository.UserToDoRepository
+import com.example.kotlinapplication.adapter.infrastructure.repository.UserToDoRepository
 import com.example.kotlinapplication.domain.user.todo.UserToDoEntities
 import com.example.kotlinapplication.domain.user.todo.UserToDoEntity
 import org.apache.ibatis.session.RowBounds

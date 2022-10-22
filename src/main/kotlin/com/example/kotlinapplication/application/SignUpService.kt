@@ -1,10 +1,10 @@
 package com.example.kotlinapplication.application
 
+import com.example.kotlinapplication.adapter.infrastructure.repository.UserMasterRepository
 import com.example.kotlinapplication.config.Environments
 import com.example.kotlinapplication.config.PasswordConfig
 import com.example.kotlinapplication.domain.exception.ApiApplicationException
 import com.example.kotlinapplication.domain.exception.ErrorCode
-import com.example.kotlinapplication.domain.service.repository.UserMasterRepository
 import com.example.kotlinapplication.domain.user.UserMasterEntity
 import com.example.kotlinapplication.util.StringUtil
 import org.springframework.stereotype.Service

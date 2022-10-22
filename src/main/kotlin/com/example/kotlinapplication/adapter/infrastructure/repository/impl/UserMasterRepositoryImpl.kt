@@ -1,7 +1,7 @@
-package com.example.kotlinapplication.adapter.infrastructure.repository
+package com.example.kotlinapplication.adapter.infrastructure.repository.impl
 
 import com.example.kotlinapplication.adapter.infrastructure.mapper.UserMasterMapper
-import com.example.kotlinapplication.domain.service.repository.UserMasterRepository
+import com.example.kotlinapplication.adapter.infrastructure.repository.UserMasterRepository
 import com.example.kotlinapplication.domain.user.UserMasterEntity
 import org.springframework.stereotype.Repository
 
