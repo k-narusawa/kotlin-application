@@ -1,7 +1,7 @@
 spring:
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST}
-    username: ${MYSQL_USER:root}
+    url: ${DATASOURCE_URL}
+    username: ${DATASOURCE_USER:root}
     password:
     driverClassName: com.mysql.cj.jdbc.Driver
   sql:
@@ -11,7 +11,7 @@ spring:
       data-locations: classpath:sql/data.sql
 
 spring.redis:
-  host: ${REDIS_HOST:localhost}
+  host: ${REDIS_HOST:127.0.0.1}
   port: ${REDIS_PORT:6379}
   password: null
   database: 0
