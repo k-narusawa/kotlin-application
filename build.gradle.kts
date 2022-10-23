@@ -40,6 +40,10 @@ jib {
     image = "registry.hub.docker.com/19992240/kotlin-application"
     tags = setOf("$version", "$version")
   }
+  container {
+    args = listOf()
+    ports = listOf("8080")
+  }
 }
 
 tasks.withType<Test> {

@@ -22,4 +22,7 @@ jobs:
         uses: gradle/gradle-build-action@v2
 
       - name: Push Docker Image
-        run: ./gradlew jib -Djib.to.auth.username=${{secrets.DOCKERHUB_USER_NAME}} -Djib.to.auth.password=${{secrets.DOCKER_HUB_PASSWORD}}
+        run: |
+          ./gradlew jib \
+          -Djib.to.auth.username=${{secrets.DOCKERHUB_USER_NAME}} \
+          -Djib.to.auth.password=${{secrets.DOCKER_HUB_PASSWORD}}
