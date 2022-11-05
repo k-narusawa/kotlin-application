@@ -33,6 +33,8 @@ dependencies {
   testImplementation("org.springframework.boot:spring-boot-starter-test")
   testImplementation("org.springframework.security:spring-security-test")
   runtimeOnly("mysql:mysql-connector-java")
+  testImplementation("com.intuit.karate:karate-core:1.3.0")
+  testImplementation("com.intuit.karate:karate-junit5:1.3.0")
 }
 
 jib {
