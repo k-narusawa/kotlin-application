@@ -48,6 +48,15 @@ jib {
   }
 }
 
+sourceSets {
+  test {
+    resources {
+      srcDir("src/test/kotlin")
+      exclude("**/*.kt")
+    }
+  }
+}
+
 tasks.withType<Test> {
   useJUnitPlatform()
 }

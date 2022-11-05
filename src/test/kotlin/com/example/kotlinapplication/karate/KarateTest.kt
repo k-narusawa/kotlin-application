@@ -4,7 +4,7 @@ import com.intuit.karate.junit5.Karate
 
 class KarateTest {
   @Karate.Test
-  fun test(): Karate? {
+  fun testAll(): Karate? {
     return Karate.run().relativeTo(javaClass)
   }
 }
