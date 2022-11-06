@@ -1,7 +1,18 @@
-Feature: sample
+Feature: 認証
 
-  Scenario: first hello world
-    * print 'hello'
+  Background:
+    * url "http://127.0.0.1:8080"
 
-  Scenario: second scenario
-    * print 'second'
+  Scenario: ログインができること
+    Given path '/api/login'
+    And request {"loginId": "admin","password": "admin"}
+    When method post
+    Then status 200
+    And def accessToken = response.accessToken
+    And def refreshToken = response.refreshToken
+
+  Scenario: ログインに失敗すること
+    Given path '/api/login'
+    And request {"loginId": "dummy","password": "dummy"}
+    When method post
+    Then status 401
