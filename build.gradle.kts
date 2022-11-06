@@ -35,6 +35,7 @@ dependencies {
   runtimeOnly("mysql:mysql-connector-java")
   testImplementation("com.intuit.karate:karate-core:1.3.0")
   testImplementation("com.intuit.karate:karate-junit5:1.3.0")
+  testImplementation("com.intuit.karate:karate-mock-servlet:1.3.0")
 }
 
 jib {
